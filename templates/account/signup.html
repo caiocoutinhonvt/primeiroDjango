@@ -1,0 +1,99 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Lista de gastos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	
+	
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar" >
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+        
+				<div class="p-4">
+		  		<h1 class="title is-3" ><a class="logo">WALLET</a></h1>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <a href="/"><span class="fa fa-user mr-3"></span>Seus gastos</a>
+	          </li>
+	          <li>
+	              <a href="/adicionar"><i class="fa  fa-cart-plus"></i> &nbsp; Adicionar uma compra</a>
+                
+	          </li>
+	          <li>
+              <a href="/visaogeral"><span class="fa fa-pie-chart"></span> &nbsp; Visão geral </a>
+	          </li>
+	          <li>
+              <a href="#"><span class="fa fa-credit-card"></span> &nbsp; Cartão de crédito </a>
+	          </li>
+          
+            <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+          <li>
+            {% if user.is_authenticated %}
+                    
+                    <li class="nav-item">
+                      <br><br>
+                        <a class="nav-link" href="{% url 'account_logout' %}">Sair</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_login' %}">Entrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_signup' %}">Cadastro</a>
+                    </li>
+                    {% endif %}
+	         
+	        </li>
+
+	        <br>
+          <br>
+          
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-1 p-md-5 pt-1" width>
+        <br>
+        <br>
+        <section class="section">
+          <div class="box is-centered">   
+            <section></section>
+            
+            <h2 class="title is-3">Cadastro</h2>
+            
+            <form method="post">
+                {% csrf_token %}
+                <div class="card" style="width: 20rem;">
+                {{ form|crispy }}
+              </div>
+              </a>
+                <button class="button is-link" type="submit">Entrar</button>
+            </form>
+                
+          </div>      
+          
+        </section>
+      </div>
+		</div>
+
+    
+  </body>
+</html>
