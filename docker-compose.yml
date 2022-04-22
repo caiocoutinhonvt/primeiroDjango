@@ -1,22 +1,26 @@
-version: '3.8'
+version: '3.1'
 
 services:
-  mysql-db:
-    image: mysql
-    
-    container_name: mysql_teste
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: contas
-      MYSQL_USER: root 
-    volumes:
-      - ./data/db:/var/lib/mysql
-    ports:
-      - "3310:3306"
-    cap_add:
-      - SYS_NICE
+  
   adminer:
-    image: adminer:4
+    image: adminer
     container_name: adminer_teste
     ports:
       - 8080:8080
+
+
+  db:
+    image: mysql:5.7
+    container_name: mysql_teste
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: contas
+
+    volumes:
+      - ./data3/db:/var/lib/mysql
+    ports:
+      - "8050:3306"
+    cap_add:
+      - SYS_NICE
+
+

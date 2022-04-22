@@ -48,11 +48,12 @@
             {% if user.is_authenticated %}
                     
                     <li class="nav-item">
-                      <br><br>
+                      <br><br><br><br><br><br><br>
                         <a class="nav-link" href="{% url 'account_logout' %}">Sair</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
+                      <br><br><br><br><br>
                         <a class="nav-link" href="{% url 'account_login' %}">Entrar</a>
                     </li>
                     <li class="nav-item">

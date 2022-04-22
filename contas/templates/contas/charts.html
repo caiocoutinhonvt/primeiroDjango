@@ -54,11 +54,12 @@
             {% if user.is_authenticated %}
                     
                     <li class="nav-item">
-                      <br><br>
+                      <br><br><br><br><br><br><br>
                         <a class="nav-link" href="{% url 'account_logout' %}">Sair</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
+                      <br><br><br><br><br>
                         <a class="nav-link" href="{% url 'account_login' %}">Entrar</a>
                     </li>
                     <li class="nav-item">
@@ -93,10 +94,10 @@
                 const myChart = new Chart(ctx, {
                     type: 'pie',
                     data: {
-                        labels: [ 'Despesas gerais','Transporte', 'Alimentação'],
+                        labels:  ['Despesas Gerais', 'Alimentação', 'Transporte'],
                         datasets: [{
                             label: 'My First Dataset',
-                            data: {{graph}},
+                            data: [{{ transacoes_t}}, {{transacoes_a}}, {{transacoes_d}}],
                             backgroundColor: [
                                 'rgb(255, 99, 132)',
                                 'rgb(54, 162, 235)',

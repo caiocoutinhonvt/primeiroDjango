@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-import datetime
+
 from .models import Transacao
 from .forms import TransacaoForm
 from django.db.models import Sum
+from django.contrib import messages
 
 
 
@@ -28,9 +29,13 @@ def nova_transacao(request):
         data = {}
         form = TransacaoForm(request.POST or None)
 
+       
         if form.is_valid():
             form.save()
-            return redirect('url_listagem')                 #retorna para a pagina listagem
+            print('foi')
+            return redirect('url_listagem')
+
+                         
 
         data['form'] = form
     else:
@@ -41,17 +46,20 @@ def nova_transacao(request):
 
 #UPDATE
 def update(request, id):
+    if request.user.is_authenticated:
+        data = {}
+        transacao = Transacao.objects.get(id=id)
+        form = TransacaoForm(request.POST or None, instance=transacao)
+
     
-    data = {}
-    transacao = Transacao.objects.get(id=id)
-    form = TransacaoForm(request.POST or None, instance=transacao)
+     
+        if form.is_valid():
+            form.save()
+            print('foi')
+            return redirect('url_listagem')
 
-    if form.is_valid():
-        form.save()
-        return redirect('url_listagem')                 #retorna para a pagina listagem
-
-    data['form'] = form
-    data['transacao'] = transacao
+        data['form'] = form
+        data['transacao'] = transacao
     return render(request, 'contas/form.html', data)
 
 
@@ -66,9 +74,10 @@ def delete(request, id):
 
 def charts(request):
     if request.user.is_authenticated:
-        data = {
-            'graph':[500, 25, 250]
-        }
+        data = {'transacoes': Transacao.objects.all().count(),
+                'transacoes_d': Transacao.objects.filter(categoria_id = 1).count(),
+                'transacoes_a': Transacao.objects.filter(categoria_id = 2).count(),
+                'transacoes_t' : Transacao.objects.filter(categoria_id = 3).count() }
         
         return render(request, 'contas/charts.html', data)
     else:

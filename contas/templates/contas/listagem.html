@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 
 <!doctype html>
 <html lang="en">
@@ -47,11 +48,12 @@
             {% if user.is_authenticated %}
                     
                     <li class="nav-item">
-                      <br><br>
+                      <br><br><br><br><br><br><br>
                         <a class="nav-link" href="{% url 'account_logout' %}">Sair</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
+                      <br><br><br><br><br>
                         <a class="nav-link" href="{% url 'account_login' %}">Entrar</a>
                     </li>
                     <li class="nav-item">
@@ -89,8 +91,8 @@
                 <div class="columns is-mobile">
                   
                   <div class="column"> {{  transacao.descricao}}</div>
-                  <div class="column is-one-third">{{transacao.data|date:"D, d M Y" }} </div>
-                  <div class="column">R$ {{transacao.valor}}</div>
+                  <div class="column is-one-third">{{transacao.data|date:"D, d/m/Y" }} </div>
+                  <div class="column">R$ {{transacao.valor|intcomma}}</div>
                   <div class="column">{{transacao.categoria}}</div>
                   <div class="colum">{{transacao.valor__sum}}</div>
                   
@@ -104,7 +106,7 @@
               </ul>
               <br>
       
-              <a type="button"  class="button is-link" href="{%url 'url_nova'%}">
+              <a type="button"  class="button is-link" href="{% url 'url_nova' %}">
               Adicionar
               <a>
                 

@@ -11,11 +11,8 @@ class TransacaoForm(ModelForm):
         fields = ['data', 'descricao', 'valor', 'categoria']
 
         widgets = {
-            'data': forms.SelectDateWidget( attrs={
-                                                'class': 'form-control datetimepicker-input',
-                                                'data-target': 'datetimepicker1',
-                                                'data-mask': 'data-mask',}),
-            'valor': forms.NumberInput(attrs={'class': 'form-control'}),
+            'data': forms.DateInput( attrs={ 'class': 'form-control date',}),
+            'valor': forms.TextInput(attrs={'class':'form-control money ', 'type':'text'}),
             'descricao': forms.TextInput(attrs={'class': 'form-control'}),
             'categoria': forms.Select(attrs={'class': 'form-control'})
         }

@@ -1,5 +1,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
+{% load humanize %}
 
 <!doctype html>
 <html lang="en">
@@ -49,11 +50,12 @@
             {% if user.is_authenticated %}
                     
                     <li class="nav-item">
-                      <br><br>
+                      <br><br><br><br><br><br><br>
                         <a class="nav-link" href="{% url 'account_logout' %}">Sair</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
+                      <br><br><br><br><br>
                         <a class="nav-link" href="{% url 'account_login' %}">Entrar</a>
                     </li>
                     <li class="nav-item">
@@ -75,7 +77,7 @@
       <section class="section">
         
         <div class="box is-centered  "> 
-          <form method="POST", >
+          <form method="POST" id="myForm" >
             <h1 class="title is-3">Despesa</h1>
               {% csrf_token %}
 
@@ -95,7 +97,8 @@
                   </div>
                   <div class="col">
                     <p class="has-text-black">Data:</p>
-                    <p class="card has-text-black" style="width: 20rem;">  {{form.data}} </p>
+                    <p class="card has-text-black" style="width: 20rem;" placeholder="__/__/____"> 
+                       {{form.data}} </p>
                   </div>
                 </div>
               </div>
@@ -121,13 +124,22 @@
                   <br>
                   <button class="button is-link  "type="submit">Salvar</button> -->
                   <button class="button is-link  "type="submit">Salvar</button> 
-                 
+
                   {% if transacao %}
                   
                   
-                <a href="{% url 'url_delete' transacao.id %}" class="button is-danger">Remover</a>
-                {%endif%}
+                  <a href="{% url 'url_delete' transacao.id %}" class="button is-danger">Remover</a>
                   
+                  {%endif%}
+                  <br>
+                  
+                 
+
+                </div> 
+                 
+                 
+                  
+                
               </div> 
               
               <br>
@@ -137,6 +149,9 @@
           
         </section>
     </div>  
- 
+
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script> 
+    <script src="{% static 'jquery.mask.min.js' %}"></script> 
+    <script src="{% static 'mascara.js' %}"></script>
 </body>
 </html>
