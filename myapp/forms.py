@@ -11,7 +11,7 @@ class TransactionForm(ModelForm):
         fields = ['date', 'description', 'price', 'category']
 
         widgets = {
-            'date': forms.DateInput( attrs={ 'class': 'form-control date',}),
+            'date': forms.DateInput( attrs={ 'class': 'form-control date'}),
             'price': forms.TextInput(attrs={'class':'form-control money ', 'type':'text'}),
             'description': forms.TextInput(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'})

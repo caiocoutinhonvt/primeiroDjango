@@ -1,0 +1,1 @@
+web: gunicorn wallet_site.wsgi

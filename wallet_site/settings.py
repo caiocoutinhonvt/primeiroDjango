@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-
-
+import django_on_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,7 +28,7 @@ SECRET_KEY = 'django-insecure-a5ubtcelj1e&(=6b^0_&tz!y=7ru*4ygk(so65%6#p)oj$&y7f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://wallet-django1.herokuapp.com/']
 
 
 # Application definition
@@ -167,3 +166,5 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+django_on_heroku.settings(locals())
