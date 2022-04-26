@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Transaction
+from .models import Transaction, Category
 from django import forms
 
 
@@ -17,3 +17,14 @@ class TransactionForm(ModelForm):
             'category': forms.Select(attrs={'class': 'form-control'})
         }
         
+
+class CategoryForm(ModelForm):
+    class Meta:
+        model = Category
+      
+        fields = ['name']
+
+        widgets = {
+
+            'name': forms.TextInput(attrs={'class': 'form-control'})
+        }

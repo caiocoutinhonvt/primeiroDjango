@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from myapp.views import  list, create, update, delete,charts
+from myapp.views import  list, create, update, delete,charts,create_category,dashboard
 
 
 urlpatterns = [
@@ -29,6 +29,7 @@ urlpatterns = [
     path('visaogeral/', charts),
     #login user
     path('accounts/', include('allauth.urls'), name=''),
-
+    path('categoria/', create_category  , name = 'url_create_category'),
+    path('dashboard/', dashboard, name = 'dashboard_url')
     
 ]

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 
 from .models import Transaction
-from .forms import TransactionForm
+from .forms import TransactionForm, CategoryForm
 
 
 # Create your views here.
@@ -14,8 +14,9 @@ def login(request):
 def list(request):
     if request.user.is_authenticated:
         data = {}
-        data ['transaction'] = Transaction.objects.all()
+        data ['transaction'] = Transaction.objects.all().filter(user=request.user)
         return render(request,'contas/listagem.html', data)
+        
     else:
         return HttpResponseRedirect('/accounts/login')
 
@@ -28,7 +29,9 @@ def create(request):
 
        
         if form.is_valid():
-            form.save()
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
             print('foi')
             return redirect('url_list')
 
@@ -51,7 +54,10 @@ def update(request, id):
     
      
         if form.is_valid():
-            form.save()
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
+            print('foi')
             return redirect('url_list')
 
         data['form'] = form
@@ -68,13 +74,42 @@ def delete(request, id):
     return redirect('url_list') 
 
 
+# CHARTS
 def charts(request):
     if request.user.is_authenticated:
         data = {'transaction': Transaction.objects.all().count(),
-                'transaction_d': Transaction.objects.filter(category_id = 1).count(),
-                'transaction_a': Transaction.objects.filter(category_id = 3).count(),
-                'transaction_t' : Transaction.objects.filter(category_id = 2).count()}
+                'transaction_d': Transaction.objects.filter(category_id = 1, user=request.user).count(),
+                'transaction_a': Transaction.objects.filter(category_id = 3, user= request.user).count(),
+                'transaction_t' : Transaction.objects.filter(category_id = 2, user =request.user).count()}
         
         return render(request, 'contas/charts.html', data)
     else:
         return HttpResponseRedirect('/accounts/login')
+
+
+# CREATE CATEGORY 
+def create_category(request): 
+
+
+    if request.user.is_authenticated:                                     
+        data = {}
+        form = CategoryForm(request.POST or None)
+
+       
+        if form.is_valid():
+            form.save()
+            print('foi')
+            return redirect('url_list')
+
+                         
+
+        data['form'] = form
+    else:
+        return HttpResponseRedirect('/accounts/login')
+        
+
+    return render(request, 'contas/category.html', data)
+
+
+def dashboard(request):
+    return render(request,'contas/dashboard.html')
