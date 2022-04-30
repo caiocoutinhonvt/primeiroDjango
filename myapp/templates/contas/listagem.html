@@ -7,13 +7,51 @@
 
 
 
+
 {% block title %} Lista de gastos {% endblock %}
 
         
   {% block content %}
-<div id="content" class="p-7 p-md-3 pt-1">
-        <br>
-        <br>
+
+  <!-- Box contents -->
+  <div id="content" class="p-7 p-md-3 pt-1">
+    <section class="section">
+        
+            
+                <div class="row">
+                    <div class="card container-fluid bg-danger" style="width: 17rem;">
+                        <div class="card-body">
+                        <h5 class="card-title">Valor total</h5>
+                        <h1 class="title is-3">R$ {{price}}</h1>
+                        
+                        
+                    </div>
+                </div>
+                  
+                  <div class="card container-fluid bg-warning" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Limite mensal</h5>
+                      <h1 class="title is-3">R$ {{limit_month}}</h1>
+                     <a href="{% url 'url_limit_month' limit_month_obj.id %}"> <button type="button" class="btn btn-primary" ">Definir</button></a> 
+
+                      
+                    </div>
+                  </div>
+
+                  <div class="card container-fluid bg-info" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Saldo restante</h5>
+                      <h1 class="title is-3">R$ {{remaining}}</h1>
+                      
+                   
+                    </div>
+                  </div>
+
+                  
+  <!-- List contents -->
+  <div id="content" class="p-10 p-md-9 pt-1">
+        
+        
         <section class="section">
           <div class="box is-centered">   
             <section></section>

@@ -1,0 +1,53 @@
+{% extends 'contas/base.html' %}
+
+{% block content %}
+
+<div id="content" class="p-1 p-md-1 pt-1">
+    <section class="section">
+      
+      <div class="box is-centered  "> 
+        <form method="POST" id="myForm" >
+          <h1 class="title is-3">Defina o seu limite mensal</h1>
+            {% csrf_token %}
+  
+            
+            <div class="ccontainer overflow-hidden">
+              <div class="row gy-5">
+                <div class="col">
+                  <p class="has-text-black">Limite mensal:</p>
+                  <br>
+                  <p class="card"  style="width: 20rem;">  {{form.limit_month}}</p>
+                  <br>
+                
+                 
+              </div>
+            </div>
+            <br>
+  
+            <div class="con"></div>
+            
+  
+                <button class="button is-link  "type="submit">Salvar</button> 
+  
+               
+                <br>
+                
+               
+  
+              </div> 
+               
+               
+                
+              
+            </div> 
+            
+            <br>
+            
+        </div>
+      
+        
+      </section>
+
+
+
+{% endblock %}

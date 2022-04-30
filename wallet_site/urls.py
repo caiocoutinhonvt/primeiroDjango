@@ -15,21 +15,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from myapp.views import  list, create, update, delete,charts,create_category,dashboard
+from myapp.views import  list, create, update, delete,charts,list_category,dashboard, create_category, update_category, delete_category, limit_month
 
 
 urlpatterns = [
-    # django admin
+    # DJANGO ADMIN
     path('admin/', admin.site.urls),
-    # my site
+
+    # TRANSACTIONS 
+
     path('', list, name='url_list'),
     path('update/<int:id>/', update, name='url_update'),    
     path('delete/<int:id>/', delete, name='url_delete'), 
     path('adicionar/', create , name = 'url_create'),
     path('visaogeral/', charts),
-    #login user
+    path('dashboard/', dashboard, name = 'dashboard_url'),
+
+    #LOGIN USER 
     path('accounts/', include('allauth.urls'), name=''),
-    path('categoria/', create_category  , name = 'url_create_category'),
-    path('dashboard/', dashboard, name = 'dashboard_url')
+
+    #CATEGORY
+    path('categoria/', list_category  , name = 'url_list_category'),
+    path('adicionar_categoria/', create_category, name = 'url_create_category'),
+    path('update_categoria/<int:id>/', update_category, name='url_update_category'), 
+    path('delete_categoria/<int:id>/', delete_category, name='url_delete_category'), 
+
+    path('limit_month/<int:id>/', limit_month, name = 'url_limit_month')
     
 ]

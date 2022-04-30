@@ -1,1 +1,83 @@
 {% extends "contas/base.html" %}
+
+{% block content %}
+
+
+<div id="content" class="p-7 p-md-3 pt-1">
+    <section class="section">
+        <div class="box is-centered" wid>
+            <section class="section">
+                <div class="row">
+                    <div class="card container-fluid bg-danger" style="width: 17rem;">
+                        <div class="card-body">
+                        <h5 class="card-title">Valor total</h5>
+                        <h1 class="title is-3">${{total_price}}</h1>
+                        
+                        
+                    </div>
+                </div>
+                  
+                  <div class="card container-fluid bg-warning" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Limite mensal</h5>
+                      <h1 class="title is-3">$0,00</h1>
+                      
+                    </div>
+                  </div>
+
+                  <div class="card container-fluid bg-info" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Saldo restante</h5>
+                      <h1 class="title is-3"></h1>
+                   
+                    </div>
+                  </div>
+                <div class ='row '>
+                
+                <div class="column is-1">
+                
+                  <div class="column is-4" style="width: 30rem;">
+                    <br><br>
+                    <canvas id="myChart" >
+    
+                        <script>
+                        const ctx = document.getElementById('myChart').getContext('2d');
+                        const myChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels:  [transaction_a],
+                                datasets: [{
+                                    label: 'My First Dataset',
+                                    data: [{{transaction_d}}, {{transaction_a}}, {{transaction_t}}],
+                                    backgroundColor: [
+                                        'rgb(255, 99, 132)',
+                                        'rgb(54, 162, 235)',
+                                        'rgb(255, 205, 86)'
+                                    ],
+                                    hoverOffset: 4
+                                }]
+                            },
+                            
+                        });
+                        </script>
+                     
+                     
+                          
+                   </div>
+                </div>
+            </div>
+                </canvas>
+           </div>
+           </section>          
+             
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+      
+
+
+
+{% endblock %}

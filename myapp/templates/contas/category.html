@@ -9,58 +9,61 @@
 {% block title %} Lista de gastos {% endblock %}
 
 {% block content %} 
-<div id="content" class="p-1 p-md-1 pt-1">
-    <section class="section">
-      
-      <div class="box is-centered  "> 
-        <form method="POST" id="myForm" >
-          <h1 class="title is-3">Categoria</h1>
-            {% csrf_token %}
-  
-            
-            <div class="ccontainer overflow-hidden">
-              <div class="row gy-5">
-                <div class="col">
-                  <p class="has-text-black">Descrição:</p>
-                  <br>
-                  <p class="card"  style="width: 20rem;">  {{form.name}} </p>
-                  <br>
-                
-                
-                </div>
-              </div>
-            </div>
-            <br>
-  
-            <div class="con"></div>
-            
-  
-                <button class="button is-link  "type="submit">Salvar</button> 
-  
-                {% if transaction %}
-                
-                
-                <a href="{% url 'url_delete' transaction.id %}" class="button is-danger">Remover</a>
-                
-                {%endif%}
-                <br>
-                
-               
-  
-              </div> 
-               
-               
-                
-              
-            </div> 
-            
-            <br>
-            
-        </div>
-      
+<div id="content" class="p-7 p-md-3 pt-1">
         
-      </section>
-  </div>  
+        
+  <section class="section">
+    <div class="box is-centered">   
+      <section></section>
+        <h1 class="title is-3">Categorias</h1>
+       <div class="columns is-mobile">
+            
+            <div class="column has-text-black"> Nome</div>
+            <div class="column has-text-black"> Limite</div>
+            <div class="column has-text-black"></div>
+           
+           
+            
+            
+            
+          </div>
+        
+
+        {% for c in category %}
+          
+        
+
+        <a href="{% url 'url_update_category' c.id %}"> 
+          
+          <div class="columns is-mobile">
+            
+            
+            <div class="column"> {{c.name}}</div>
+            <div class="column"> R$ {{c.limit_month}}</div>
+            
+            <div class="column has-text-black"></div>
+            
+            
+            
+            
+          </div>
+        
+           
+        </a>
+        {%endfor%}
+    
+        </ul>
+        <br>
+
+        <a type="button"  class="button is-link" href="{% url 'url_create_category' %}">
+        Adicionar
+        <a>
+        
+    {% endblock %}
+    </div>      
+    
+  </section>
+</div>
+</div>
 
 
-{% endblock %}
