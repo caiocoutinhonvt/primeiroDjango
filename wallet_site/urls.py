@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from myapp.views import  list, create, update, delete,charts,list_category,dashboard, create_category, update_category, delete_category, limit_month
-
+from myapp.views import  list, create, update, delete,charts,list_category, create_category, update_category, delete_category, limit_month, profile, createprofile, editprofile
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # DJANGO ADMIN
@@ -29,7 +30,8 @@ urlpatterns = [
     path('delete/<int:id>/', delete, name='url_delete'), 
     path('adicionar/', create , name = 'url_create'),
     path('visaogeral/', charts),
-    path('dashboard/', dashboard, name = 'dashboard_url'),
+    
+    
 
     #LOGIN USER 
     path('accounts/', include('allauth.urls'), name=''),
@@ -39,7 +41,15 @@ urlpatterns = [
     path('adicionar_categoria/', create_category, name = 'url_create_category'),
     path('update_categoria/<int:id>/', update_category, name='url_update_category'), 
     path('delete_categoria/<int:id>/', delete_category, name='url_delete_category'), 
+    path('limit_month/<int:id>/', limit_month, name = 'url_limit_month'),
 
-    path('limit_month/<int:id>/', limit_month, name = 'url_limit_month')
-    
+    # PROFILE 
+    path('edit_profile/', editprofile, name="url_profile_view"),
+    path('profile/', profile, name="url_profile"),
+    path('create_profile/', createprofile, name="url_create_profile")
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

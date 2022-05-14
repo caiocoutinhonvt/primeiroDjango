@@ -13,22 +13,23 @@
     
       <section></section>
       <div class="box is-centered" wid>
+      <h1 class='title is-2' style="margin-left: 135mm;">Visão Geral</h1>
           <section class="section">
            <canvas id="myChart" ></canvas>
   
-             <script>
+            <script>
               const ctx = document.getElementById('myChart').getContext('2d');
               const myChart = new Chart(ctx, {
                   type: 'pie',
                   data: {
-                      labels:  ['Despesas Gerais', 'Alimentação', 'Transporte'],
+                      labels:  [{% for cat in category %} '{{cat}}', {%endfor%}],
                       datasets: [{
                           label: 'My First Dataset',
-                          data: [{{transaction_d}}, {{transaction_a}}, {{transaction_t}}],
+                          data: [{% for transaction in transactions %} '{{transaction}}', {%endfor%}],
                           backgroundColor: [
-                              'rgb(255, 99, 132)',
-                              'rgb(54, 162, 235)',
-                              'rgb(255, 205, 86)'
+                              {% for t in transaction_color%}
+                              '{{t.color}}',
+                              {% endfor %}
                           ],
                           hoverOffset: 4
                       }]
@@ -36,15 +37,8 @@
                   
               });
               </script>
-         
-      </div>
-      </section>          
-        
-
-        
-       
-    </div>      
-    
+          </section>  
+      </div>    
   </section>
 </div>
   </div>

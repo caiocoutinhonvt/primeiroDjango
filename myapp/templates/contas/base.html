@@ -1,6 +1,8 @@
 {% load static %}
-{% load crispy_forms_tags %}
+
 {% load humanize %}
+{% load bootstrap %}
+
 
 
 
@@ -8,9 +10,10 @@
 <html lang="en">
 <head>
     {% block head %}
+    <meta name=viewport content="width=1170">
   	<title>{%block title %} {% endblock%}</title>
-    {% endblock %}
-
+    
+   	
     <!-- semantic UI -->
     <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
     <!--Chart js-->
@@ -21,19 +24,35 @@
 
 
     <!-- Bootstrap, bulma and css -->
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+    <link rel="stylesheet" href="{%static 'css/main.css'%}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel=”stylesheet” href=”css/bootstrap-responsive.css”>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
-    
+    {% endblock %}
     
    
     <style>
       body {
         background-color: #f0f0f0;}
+
+        table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+
         </style>
 </head>
 <body>
@@ -46,15 +65,16 @@
       <div class="p-4">
         <h1 class="title is-3" ><a class="logo">WALLET</a></h1>
         <h3 class="text-muted">
-          <font color='#f0f0f0'>Bem vindo, {{user}}
+          <font color='#f0f0f0'>Bem vindo, {{user.username}}
           </font>
           <h3>
           <br>
         <ul class="list-unstyled components mb-5">
           
           <li>
-            <a href="/"><span class="fa fa-user mr-3"></span>Seus gastos</a>
+            <a href="/profile"><span class="fa fa-user mr-3"></span>Perfil</a>
           </li>
+
           
           <li>
             <a href="/adicionar"><i class="fa fa-plus"></i> &nbsp; Adicionar uma compra</a>
@@ -62,6 +82,9 @@
           <li>
             <a href="/categoria "><i class="fa fa-plus"></i> &nbsp; Adicionar categoria</a>
             
+        </li>
+        <li>
+          <a href="/"><span class="fa  fa-list-ul"></span>  &nbsp; Lista de gastos</a>
         </li>
           <li>
             <a href="/visaogeral"><span class="fa fa-pie-chart"></span> &nbsp; Visão geral </a>
@@ -74,17 +97,10 @@
             {% if user.is_authenticated %}
                     
                     <li class="nav-item">
-                      <br><br><br><br><br>
-                        <a class="nav-link" href="{% url 'account_logout' %}">Sair</a>
+                      <br><br><br><br><br><br><br><br><br><br>
+                        <a class="nav-link" href="{% url 'account_logout' %}" style="margin-top: 1cm;">Sair</a>
                     </li>
-                    {% else %}
-                    <li class="nav-item">
-                      <br><br><br><br><br>
-                        <a class="nav-link" href="{% url 'account_login' %}">Entrar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">Cadastro</a>
-                    </li>
+                    
                     {% endif %}
 	         
 	        </li>

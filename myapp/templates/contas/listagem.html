@@ -1,104 +1,200 @@
-
-
 {% extends "contas/base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
+
 {% load humanize %}
 
 
 
 
-{% block title %} Lista de gastos {% endblock %}
 
-        
-  {% block content %}
+<title>{%block title %} Lista de gastos | Wallet {% endblock%}</title>
 
-  <!-- Box contents -->
-  <div id="content" class="p-7 p-md-3 pt-1">
-    <section class="section">
-        
-            
-                <div class="row">
-                    <div class="card container-fluid bg-danger" style="width: 17rem;">
-                        <div class="card-body">
-                        <h5 class="card-title">Valor total</h5>
-                        <h1 class="title is-3">R$ {{price}}</h1>
-                        
-                        
-                    </div>
-                </div>
-                  
-                  <div class="card container-fluid bg-warning" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title">Limite mensal</h5>
-                      <h1 class="title is-3">R$ {{limit_month}}</h1>
-                     <a href="{% url 'url_limit_month' limit_month_obj.id %}"> <button type="button" class="btn btn-primary" ">Definir</button></a> 
+{%block content %}
+<!-- Box contents -->
+<div id="content">
+  <section class="section pb-0 pl-0 pr-1 ml-0">
 
-                      
-                    </div>
-                  </div>
 
-                  <div class="card container-fluid bg-info" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title">Saldo restante</h5>
-                      <h1 class="title is-3">R$ {{remaining}}</h1>
-                      
-                   
-                    </div>
-                  </div>
+    <!-- SE O  USUARIO TIVER PERFIL  -->
+    {% if current_profile is True%}
+    <div class="row">
+      <div class="card container-fluid bg-danger" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Valor total</h5>
+          <h1 class="title is-3">R$ {{price}}</h1>
 
-                  
-  <!-- List contents -->
-  <div id="content" class="p-10 p-md-9 pt-1">
-        
-        
-        <section class="section">
-          <div class="box is-centered">   
-            <section></section>
-              <h1 class="title is-3">Lista de gastos</h1>
-              <div class="columns is-mobile">
-                  
-                <div class="column has-text-black">Descrição</div>
-                <div class="column is-one-third has-text-black">Data</div>
-                <div class="column has-text-black">Valor</div>
-                <div class="column has-text-black">Categoria</div>
-              </div>
-              <ul >
-              
 
-              {% for t in transaction %}
-                
-              
-      
-                
-                <a href="{% url 'url_update' t.id %}"> 
-                <div class="columns is-mobile">
-                  
-                  <div class="column"> {{t.description}}</div>
-                  <div class="column is-one-third">{{t.date|date:"D, d/m/Y" }} </div>
-                  <div class="column">R$ {{t.price|intcomma}}</div>
-                  <div class="column">{{t.category}}</div>
-                  
-                  
-                  
-                  
-                </div>
-              
-                 
-              </a>
-              {%endfor%}
-          
-              </ul>
-              <br>
-      
-              <a type="button"  class="button is-link" href="{% url 'url_create' %}">
-              Adicionar
-              <a>
-                
-          </div>      
-          
-        </section>
+        </div>
       </div>
-		</div>
+
+
+      <div class="card container-fluid bg-warning" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Limite mensal</h5>
+          <h1 class="title is-3">R$ {{limit_month}}</h1>
+
+
+
+        </div>
+      </div>
+
+      <div class="card container-fluid bg-info" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Saldo restante</h5>
+          <h1 class="title is-3">R$ {{remaining}}</h1>
+
+
+        </div>
+      </div>
+      {% endif %}
+
+
+
+
+
+
+
+      {% if current_profile is False%}
+
+      <!-- SE O USUARIO NÃO TIVER PERFIL  -->
+      <div class="row">
+        <div class="card container-fluid bg-danger" style="width: 18rem; margin-left: 22mm;">
+          <div class="card-body">
+            <h5 class="card-title">Valor total</h5>
+            <h1 class="title is-3">R$ {{price}}</h1>
+
+
+          </div>
+        </div>
+
+
+        <div class="card container-fluid bg-warning" style="width: 18rem; margin-right: 166mm;">
+          <div class="card-body">
+            <h5 class="card-title">Para liberar novas funções</h5>
+            <a href="{% url 'url_create_profile' %}" type="button" class="btn btn-primary" ">Criar perfil</a>
+                    
+                    </div>
+                  <!-- </div>
+
+                  <div class=" card container-fluid bg-info" style="width: 18rem;">
+              <div class="card-body">
+                <!-- <h5 class="card-title">Saldo restante</h5> -->
+                <!-- <h1 class="title is-3">R$ {{remaining}}</h1>
+                      
+                    
+                    </div>
+                  </div> -->
+                {% endif %}
+
+  </section>
+
+  <!-- List contents -->
+
+
+  <section class="pt-5 pl-5 pr-5">
+    <div class="box is-centered" style="margin-top: 1cm; margin-left: 1cm; margin-right: 1cm;">
+      <section></section>
+      <form method="POST" action="{% url 'url_list' %}">
+        {% csrf_token %}
+
+        <div class="row">
+          <div class="col">
+            <h1 class="title is-3" style="margin-left: 2mm">Lista de gastos</h1>
+          </div>
+          <div class="col">
+
+            <div class="select-group" style="margin-right: 5cm;"></div>
+
+
+            <input class="input is-rounded" name="start_date" type="date" style="width: 14rem; margin-left: 5cm;">
+
+
+          </div>
+          <div class="col">
+
+            <input class="input is-rounded" name="end_date" type="date"
+              style="width: 14rem; margin-left: 1cm; margin-right: 0cm;">
+          </div>
+          <div class="col">
+            <div class="select is-rounded">
+              <select name="filter_category">
+                <option value="">Selecione:</option>
+                {% for c in category_list %}
+
+                {% if c.id == filters.category_filter.id %}
+                <option selected="selected" value="{{c.id}}">{{c.name}}</option>
+                {% else %}
+                <option value="{{c.id}}"> {{c.name}} </option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+            <button class="button is-success is-light" type="submit"> Filtrar</button>
+          </div>
+        </div>
+
+      </form>
+
+
+
+
+
+
+
+
+
+
+
+
+      <br> <br>
+
+      <table class="table">
+
+
+        <thead>
+          <tr>
+            <th scope="col">Descrição</th>
+            <th scope="col">Data</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Categoria</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for t in transaction%}
+            <td> <a href="{% url 'url_update' t.id %}"> {{t.description}}</a></td>
+            <td> <a href="{% url 'url_update' t.id %}">{{t.date|date:"D, d/m/Y" }}</a> </td>
+            <td> <a href="{% url 'url_update' t.id %}">R$ {{t.price|intcomma}}</a></td>
+            <td><a href="{% url 'url_update' t.id %}" style="color:{{t.category.color}};">{{t.category}}</a></td>
+
+
+            <td>
+
+
+              <a href="{% url 'url_delete' t.id %}" class="delete is-danger" style="width: 1cm;"
+                onclick="return confirm('Deseja remover esse item?')">Remover</a>
+            </td>
+          </tr>
+        </tbody>
+        {%endfor%}
+      </table>
+
+
+
+        <br><br>
+      <a type="button" class="button is-link" href="{% url 'url_create' %}" style="height: 1cm;
+              ">
+        Adicionar
+        <a>
+
+
+
+
+
+
+  </section>
+</div>
+</div>
 
 {% endblock %}

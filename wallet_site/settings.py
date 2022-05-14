@@ -45,8 +45,15 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'crispy_forms',
     'django.contrib.humanize',
+    'django_filters',
+    'bootstrapform',
+    'crispy_forms',
+    'django_crispy_bulma',
+    "crispy_bootstrap5",
+    "bootstrap3",
+    'widget_tweaks',
+   
 ]   
 
 MIDDLEWARE = [
@@ -122,6 +129,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+STATICFILES_FINDERS = [ 'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -139,6 +153,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'wallet_site/media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -165,6 +184,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 django_on_heroku.settings(locals())

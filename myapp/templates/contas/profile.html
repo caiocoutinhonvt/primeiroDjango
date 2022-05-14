@@ -1,0 +1,154 @@
+{% extends "contas/base.html"%}
+
+{% load static %}
+
+{% load humanize %}
+
+
+
+
+{% block title %} Perfil | Wallet{% endblock %}
+
+        
+{% block content %}
+<div id="content" class="p-1 p-md-1 pt-1 pb-0">
+    {% csrf_token %}
+    <section class="section">
+    <div class="box is-centered  "> 
+      <form method="POST" id="myForm" >
+ 
+
+
+        <div class="container rounded bg-white mt-5 mb-5"> 
+          <div class="row"> <div class="col-md-3 border-right"> 
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            
+              {% if profile.profile_ṕic.url != '' %}
+              <img class="rounded-circle mt-5" src="{{ profile.profile_pic.url }}" alt="profile">
+
+              {% else %}
+              <img class="rounded-circle mt-5" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="profile">
+
+              {% endif %}
+             
+              <br>
+              <span class="font-weight-bold">{{profile.name}}</span>
+              <span class="text-black-50">{{profile.email}}</span>
+              <span> </span>
+            </div> 
+          </div> 
+          <div class="col-md-5 border-right"> 
+            <div class="p-3 py-5"> 
+              <div class="d-flex justify-content-between align-items-center mb-3"> 
+              <h1 class="title is-4">Configurações   de Perfil</h1>
+              <br>
+            </div>
+             <div class="row mt-2"> <div class="col-md-6">
+              <label class="labels has-text-black">Nome:</label>
+              
+              <div>  {{profile.name}}</div>
+              
+            </div> <div class="col-md-6 ">
+              <label class="labels has-text-black">Sobrenome:</label>
+              <div> {{profile.last_name}}</div>
+            
+            </div> 
+          </div> 
+          <div class="row mt-5"> 
+            <div class="col-md-12">
+              <label class="labels has-text-black">Genero:</label>
+              <div> {{profile.gender}}</p></div>
+              <br>
+
+            </div>
+             <div class="col-md-12">
+               <label class="labels has-text-black">Endereço:</label>
+               <div> {{profile.adress}}</div>
+              </div> 
+              <div class="col-md-12">
+                <br>
+                <label class="labels has-text-black">Email:</label>
+                <div> {{profile.email}}</div>
+              </div> 
+              <div class="col-md-12">
+                <br>
+                <label class="labels has-text-black">Telefone</label>
+                <div>  {{profile.phone}}</div>
+              </div> </div> 
+              <div class="row mt-3"> 
+                <div class="col-md-6">
+                  <label class="labels has-text-black">Estado</label>
+                  <div> {{profile.city}}</div>
+                </div>
+                   <div class="col-md-6">
+                     <label class="labels has-text-black">Cep</label>
+                     <div>  {{profile.cep}} </div>
+                    </div> 
+                  </div> 
+                  <div class="mt-5 text-center">
+                    <a class="btn btn-primary profile-button" type="button" href="{% url 'url_profile_view' %}" >
+                        
+                        Editar Perfil
+                        </a>
+                    </button>
+                  </div> 
+                </div> 
+              </div> 
+              <div class="col-md-4">
+                <div class="p-3 py-5">
+                   
+                     
+                      
+                        
+                      <div class="d-flex justify-content-between align-items-center mb-3"> 
+                        <h1 class="title is-4">Preferências do usuário</h1>
+                        <br>
+                      </div>
+                    <div class="col-md-12">
+                      <label class="labels has-text-black"> Seu limite mensal</label>
+                      <div>  {{profile.limit_month}} </div>
+                      
+                    </div> 
+                    <br>
+                    
+                </div>
+            </div>
+        </div>
+                    
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+               
+
+         
+
+        
+                </div> 
+         </div>       
+    </form>
+   </section>
+</div> 
+{% endblock %}
+
+ 

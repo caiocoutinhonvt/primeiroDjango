@@ -1,18 +1,17 @@
 
 {% extends "contas/base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
+
 {% load humanize %}
 
 
-
-{% block title %} Lista de gastos {% endblock %}
+<title>{%block title %} Categorias | Wallet {% endblock%}</title>
 
 {% block content %} 
-<div id="content" class="p-7 p-md-3 pt-1">
+<div id="content">
         
         
-  <section class="section">
+  <section class="section mt-1">
     <div class="box is-centered">   
       <section></section>
         <h1 class="title is-3">Categorias</h1>
@@ -21,6 +20,7 @@
             <div class="column has-text-black"> Nome</div>
             <div class="column has-text-black"> Limite</div>
             <div class="column has-text-black"></div>
+           
            
            
             
@@ -38,13 +38,12 @@
           <div class="columns is-mobile">
             
             
-            <div class="column"> {{c.name}}</div>
-            <div class="column"> R$ {{c.limit_month}}</div>
-            
-            <div class="column has-text-black"></div>
+            <div class="column" style="color:{{c.color}}"> {{c.name}}</div>
+            <div class="column" style="color:{{c.color}}"> R$ {{c.limit_month}}</div>
             
             
-            
+            <div class="column has-text-black"></div> 
+         
             
           </div>
         
