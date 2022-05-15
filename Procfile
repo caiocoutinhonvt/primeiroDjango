@@ -1,1 +1,1 @@
-web: gunicorn wallet_site.wsgi --log-file -
+    web: gunicorn wallet_site.wsgi --log-file -

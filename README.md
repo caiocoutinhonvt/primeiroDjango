@@ -30,6 +30,7 @@ Site de controle financeiro, onde o usuário organizar e ter um overview sobre s
 <img alt="demoimage" title ="demoimage"  src ='screenshots/despesas.jpeg'/> 
 <br>
 <img alt="demoimage" title ="demoimage"  src ='screenshots/listageral.jpeg'/> 
+<img alt="demoimage" title ="demoimage"  src ='screenshots/grafico.jpeg'/> 
 </h3>
 
 ###
