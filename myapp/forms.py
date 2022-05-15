@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from .models import Transaction, Category, Profile
 from django import forms
+from django.conf import settings
 
 
 
@@ -35,6 +36,16 @@ class ProfileForm(ModelForm):
 
 class TransactionForm(ModelForm):
     
+    # date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS,
+    #                                     widget=forms.DateInput(
+    #                                         format="%d/%m/%Y",
+    #                                         attrs={
+    #                                             'placeholder': 'digite sua data',  
+    #                                             'class': 'form-control', 
+    #                                             'type': 'date',
+    #                                         }
+    #                                     ))
+
     class Meta:
         model = Transaction
       
@@ -42,7 +53,7 @@ class TransactionForm(ModelForm):
         
 
         widgets = {
-            'date': forms.DateInput( attrs={ 'placeholder': 'digite sua data', 'class': 'form-control', 'type': 'date'}),
+            'date': forms.DateInput( attrs={ 'placeholder': 'digite sua data', 'class': 'form-control date', 'type': 'date'}),
             'price': forms.TextInput(attrs={'class':'form-control money ', 'type':'text'}),
             'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Digite sua descrição'}),
             'category': forms.Select(attrs={'class': 'form-control'})

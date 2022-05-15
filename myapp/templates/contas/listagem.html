@@ -89,30 +89,35 @@
   </section>
 
   <!-- List contents -->
-
-
   <section class="pt-5 pl-5 pr-5">
     <div class="box is-centered" style="margin-top: 1cm; margin-left: 1cm; margin-right: 1cm;">
       <section></section>
       <form method="POST" action="{% url 'url_list' %}">
         {% csrf_token %}
 
+      
+
+
+
+
+
         <div class="row">
           <div class="col">
             <h1 class="title is-3" style="margin-left: 2mm">Lista de gastos</h1>
           </div>
+              
           <div class="col">
-
+     
             <div class="select-group" style="margin-right: 5cm;"></div>
 
-
-            <input class="input is-rounded" name="start_date" type="date" style="width: 14rem; margin-left: 5cm;">
+            
+            <input class="input is-rounded" name="start_date" type="date" style="width: 14rem; margin-left: 5cm;" value="{{filters.start_date}}">
 
 
           </div>
           <div class="col">
 
-            <input class="input is-rounded" name="end_date" type="date"
+            <input class="input is-rounded" name="end_date" type="date" value="{{filters.end_date}}", placeholder=""
               style="width: 14rem; margin-left: 1cm; margin-right: 0cm;">
           </div>
           <div class="col">

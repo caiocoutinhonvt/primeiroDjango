@@ -38,7 +38,7 @@ class Profile(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField('nome', max_length=100, unique= True)
+    name = models.CharField('nome', max_length=100)
     dt_creation = models.DateTimeField(auto_now_add= True)
     limit_month = models.DecimalField(max_digits=10, decimal_places=2)
     user = models.ForeignKey(User, on_delete= models.CASCADE)

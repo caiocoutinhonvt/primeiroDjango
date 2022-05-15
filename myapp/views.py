@@ -56,17 +56,20 @@ def list(request):
         else:
             current_profile = False
 
-        #######
-        start_date = request.POST.get('start_date')
-        end_date = request.POST.get('end_date')
         
-        if start_date and end_date:
+     
+        
+        if request.POST.get('start_date'):
             transaction = transaction.filter(
-                date__range=[start_date, end_date]
-          
+                date__gte= request.POST.get('start_date')
+            )
+
+        if request.POST.get('end_date'):
+            transaction = transaction.filter(
+                date__lte= request.POST.get('end_date')
             )
         
-        #########
+
         filtered_category = None
         if request.POST.get("filter_category", None):
             filtered_category = Category.objects.get(pk=request.POST.get('filter_category', None))
@@ -90,7 +93,9 @@ def list(request):
             'profile': profile,
             'category': category,
             'filters': {
-                'category_filter': filtered_category
+                'category_filter': filtered_category,
+                'start_date': request.POST.get('start_date'),
+                'end_date': request.POST.get('end_date')
             },
             'category_list': category_list,
             'current_profile': current_profile
@@ -113,7 +118,7 @@ def create(request):
         data = {}
         
         user_id = request.user.id
-        form = TransactionForm(request.POST, user_id=user_id) 
+        form = TransactionForm(request.POST, user_id=user_id)
         data['form'] = form
         if form.is_valid():
 
@@ -193,18 +198,23 @@ def delete(request, id):
 # CHARTS
 def charts(request):
     if request.user.is_authenticated:
+        # import ipdb; ipdb.set_trace()
         transaction_color = Category.objects.filter(user=request.user)
        
         cats = Category.objects.filter(user=request.user)
 
         transactions=[]
 
+        
 
 
         for cat in cats: 
-            transaction = cat.transaction.count()
-            transactions.append(transaction)
+            transaction = cat.transaction.aggregate(Sum('price')).get('price__sum') or None
+            new_price = str (transaction)
+            transactions.append(new_price)
 
+        for t in transactions:
+            print(t)
 
         data = {
                 'category': cats,
