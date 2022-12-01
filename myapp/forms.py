@@ -30,21 +30,8 @@ class ProfileForm(ModelForm):
 
         }
 
-            
-
-
 
 class TransactionForm(ModelForm):
-    
-    # date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS,
-    #                                     widget=forms.DateInput(
-    #                                         format="%d/%m/%Y",
-    #                                         attrs={
-    #                                             'placeholder': 'digite sua data',  
-    #                                             'class': 'form-control', 
-    #                                             'type': 'date',
-    #                                         }
-    #                                     ))
 
     class Meta:
         model = Transaction
@@ -66,9 +53,6 @@ class TransactionForm(ModelForm):
         
         self.fields['category'].queryset = categories
                 
-
-
-        
 
 class CategoryForm(ModelForm):
     class Meta:

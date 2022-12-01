@@ -4,9 +4,6 @@
 {% load humanize %}
 
 
-
-
-
 <title>{%block title %} Lista de gastos | Wallet {% endblock%}</title>
 
 {%block content %}
@@ -14,109 +11,58 @@
 <div id="content">
   <section class="section pb-0 pl-0 pr-1 ml-0">
 
-
-    <!-- SE O  USUARIO TIVER PERFIL  -->
     {% if current_profile is True%}
     <div class="row">
       <div class="card container-fluid bg-danger" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Valor total</h5>
           <h1 class="title is-3">R$ {{price}}</h1>
-
-
         </div>
       </div>
-
-
       <div class="card container-fluid bg-warning" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Limite mensal</h5>
           <h1 class="title is-3">R$ {{limit_month}}</h1>
-
-
-
         </div>
       </div>
-
       <div class="card container-fluid bg-info" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Saldo restante</h5>
           <h1 class="title is-3">R$ {{remaining}}</h1>
-
-
         </div>
       </div>
       {% endif %}
-
-
-
-
-
-
-
       {% if current_profile is False%}
-
-      <!-- SE O USUARIO NÃO TIVER PERFIL  -->
       <div class="row">
         <div class="card container-fluid bg-danger" style="width: 18rem; margin-left: 22mm;">
           <div class="card-body">
             <h5 class="card-title">Valor total</h5>
             <h1 class="title is-3">R$ {{price}}</h1>
-
-
           </div>
         </div>
-
-
         <div class="card container-fluid bg-warning" style="width: 18rem; margin-right: 166mm;">
           <div class="card-body">
             <h5 class="card-title">Para liberar novas funções</h5>
             <a href="{% url 'url_create_profile' %}" type="button" class="btn btn-primary" ">Criar perfil</a>
-                    
                     </div>
-                  <!-- </div>
 
-                  <div class=" card container-fluid bg-info" style="width: 18rem;">
-              <div class="card-body">
-                <!-- <h5 class="card-title">Saldo restante</h5> -->
-                <!-- <h1 class="title is-3">R$ {{remaining}}</h1>
-                      
-                    
-                    </div>
-                  </div> -->
                 {% endif %}
-
   </section>
 
-  <!-- List contents -->
   <section class="pt-5 pl-5 pr-5">
     <div class="box is-centered" style="margin-top: 1cm; margin-left: 1cm; margin-right: 1cm;">
       <section></section>
       <form method="POST" action="{% url 'url_list' %}">
         {% csrf_token %}
-
-      
-
-
-
-
-
         <div class="row">
           <div class="col">
             <h1 class="title is-3" style="margin-left: 2mm">Lista de gastos</h1>
-          </div>
-              
+          </div> 
           <div class="col">
-     
-            <div class="select-group" style="margin-right: 5cm;"></div>
-
-            
+            <div class="select-group" style="margin-right: 5cm;"></div> 
             <input class="input is-rounded" name="start_date" type="date" style="width: 14rem; margin-left: 5cm;" value="{{filters.start_date}}">
-
-
           </div>
           <div class="col">
-
             <input class="input is-rounded" name="end_date" type="date" value="{{filters.end_date}}", placeholder=""
               style="width: 14rem; margin-left: 1cm; margin-right: 0cm;">
           </div>
@@ -125,7 +71,6 @@
               <select name="filter_category">
                 <option value="">Selecione:</option>
                 {% for c in category_list %}
-
                 {% if c.id == filters.category_filter.id %}
                 <option selected="selected" value="{{c.id}}">{{c.name}}</option>
                 {% else %}
@@ -137,25 +82,9 @@
             <button class="button is-success is-light" type="submit"> Filtrar</button>
           </div>
         </div>
-
       </form>
-
-
-
-
-
-
-
-
-
-
-
-
       <br> <br>
-
       <table class="table">
-
-
         <thead>
           <tr>
             <th scope="col">Descrição</th>
@@ -172,11 +101,7 @@
             <td> <a href="{% url 'url_update' t.id %}">{{t.date|date:"D, d/m/Y" }}</a> </td>
             <td> <a href="{% url 'url_update' t.id %}">R$ {{t.price|intcomma}}</a></td>
             <td><a href="{% url 'url_update' t.id %}" style="color:{{t.category.color}};">{{t.category}}</a></td>
-
-
             <td>
-
-
               <a href="{% url 'url_delete' t.id %}" class="delete is-danger" style="width: 1cm;"
                 onclick="return confirm('Deseja remover esse item?')">Remover</a>
             </td>
@@ -184,20 +109,11 @@
         </tbody>
         {%endfor%}
       </table>
-
-
-
         <br><br>
       <a type="button" class="button is-link" href="{% url 'url_create' %}" style="height: 1cm;
               ">
         Adicionar
         <a>
-
-
-
-
-
-
   </section>
 </div>
 </div>

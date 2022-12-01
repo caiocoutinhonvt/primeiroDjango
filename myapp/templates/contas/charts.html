@@ -5,20 +5,14 @@
 
 {% block content %}
 
-
 <div id="content" class="p-7 p-md-3 pt-1">
-    
-    
   <section class="section">
-
-    
       <section></section>
       <div class="box is-centered" wid>
       <h1 class='title is-2' style="margin-left: 134mm;">Visão Geral</h1>
           <section class="section" style="width:70rem; margin-left: 2cm;">
            <canvas id="myChart" ></canvas>
-  
-            <script >
+            <script>
               const ctx = document.getElementById('myChart').getContext('2d');
               const myChart = new Chart(ctx, {
                   type: 'pie',
@@ -40,15 +34,12 @@
                           ],
                           hoverOffset: 4
                       }]
-                  },
-                  
+                  }, 
               });
               </script>
           </section>  
       </div>    
   </section>
 </div>
-  </div>
-
-
+</div>
 {% endblock %}

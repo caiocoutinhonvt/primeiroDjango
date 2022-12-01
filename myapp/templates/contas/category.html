@@ -8,59 +8,32 @@
 <title>{%block title %} Categorias | Wallet {% endblock%}</title>
 
 {% block content %} 
-<div id="content">
-        
-        
+<div id="content">   
   <section class="section mt-1">
     <div class="box is-centered">   
       <section></section>
         <h1 class="title is-3">Categorias</h1>
        <div class="columns is-mobile">
-            
             <div class="column has-text-black"> Nome</div>
             <div class="column has-text-black"> Limite</div>
             <div class="column has-text-black"></div>
-           
-           
-           
-            
-            
-            
           </div>
-        
-
         {% for c in category %}
-          
-        
-
-        <a href="{% url 'url_update_category' c.id %}"> 
-          
+        <a href="{% url 'url_update_category' c.id %}">  
           <div class="columns is-mobile">
-            
-            
             <div class="column" style="color:{{c.color}}"> {{c.name}}</div>
             <div class="column" style="color:{{c.color}}"> R$ {{c.limit_month}}</div>
-            
-            
             <div class="column has-text-black"></div> 
-         
-            
-          </div>
-        
-           
+          </div> 
         </a>
         {%endfor%}
-    
         </ul>
         <br>
-
         <a type="button"  class="button is-link" href="{% url 'url_create_category' %}">
         Adicionar
         <a>
-        
     {% endblock %}
     </div>      
-    
   </section>
 </div>
 </div>

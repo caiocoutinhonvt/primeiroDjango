@@ -1,22 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.db.models import Sum, Q, Avg, FloatField
-
 from .models import Transaction, Category, Profile
 from .forms import TransactionForm, CategoryForm, ProfileForm
-
 from decimal import Decimal
 from django.contrib import messages
 import django_filters
 
 
-
-# Create your views here.
-
-
-
-
-# MONTH VALUE 
 def limit_month(request, id):
    
     if request.user.is_authenticated:
@@ -36,10 +27,6 @@ def limit_month(request, id):
     return render(request, 'contas/limit_month.html', data)
 
 
-
-
-
-# LIST TRANSACTION
 def list(request):
     if request.user.is_authenticated:
         transaction = Transaction.objects.filter(user=request.user)
@@ -56,9 +43,6 @@ def list(request):
         else:
             current_profile = False
 
-        
-     
-        
         if request.POST.get('start_date'):
             transaction = transaction.filter(
                 date__gte= request.POST.get('start_date')
@@ -69,14 +53,11 @@ def list(request):
                 date__lte= request.POST.get('end_date')
             )
         
-
         filtered_category = None
         if request.POST.get("filter_category", None):
             filtered_category = Category.objects.get(pk=request.POST.get('filter_category', None))
             transaction = transaction.filter(category_id=request.POST.get('filter_category'))
 
-     
-        
         if profile is None:
             limit_month = Decimal(0.0)
 
@@ -101,18 +82,11 @@ def list(request):
             'current_profile': current_profile
             
         }
-
-        
         return render(request,'contas/listagem.html', context)
-        
     else:
         return HttpResponseRedirect('/accounts/login')
 
 
-
-
-
-# CREATE TRANSACTION
 def create(request): 
     if request.user.is_authenticated:                                     
         data = {}
@@ -139,17 +113,12 @@ def create(request):
             task.save()
             messages.success(request, 'Profile details updated.')
             return redirect('url_list')
-
     else:
         return HttpResponseRedirect('/accounts/login')
         
-
     return render(request, 'contas/form.html', data)
 
 
-
-
-#UPDATE TRANSACTION
 def update(request, id):
     if request.user.is_authenticated:
         data = {}
@@ -159,9 +128,7 @@ def update(request, id):
         data['form'] = form
         data['transaction'] = transaction
     
-     
         if form.is_valid():
-
             category = Category.objects.get(pk=request.POST['category'])
             category_total_value = category.transaction\
                 .filter(date__month=4, date__year=2022)\
@@ -169,7 +136,6 @@ def update(request, id):
                 .aggregate(Sum('price'))\
                 .get('price__sum') or 0
 
-            
             if category.limit_month < (category_total_value + Decimal(request.POST['price']) ):
                 error = f"Despesa ultrapassa o valor limite mensal de R$ {category.limit_month} da categoria: {category.name}"
                 data['error'] = error
@@ -183,9 +149,6 @@ def update(request, id):
     return render(request, 'contas/form.html', data)
 
 
-
-
-# DELETE TRANSCATION
 def delete(request, id):
     transaction = Transaction.objects.get(id=id)
     transaction.delete()
@@ -193,9 +156,6 @@ def delete(request, id):
     return redirect('url_list') 
 
 
-
-
-# CHARTS
 def charts(request):
     if request.user.is_authenticated:
         # import ipdb; ipdb.set_trace()
@@ -204,9 +164,6 @@ def charts(request):
         cats = Category.objects.filter(user=request.user)
 
         transactions=[]
-
-        
-
 
         for cat in cats: 
             transaction = cat.transaction.aggregate(Sum('price')).get('price__sum') or None
@@ -226,10 +183,7 @@ def charts(request):
     else:
         return HttpResponseRedirect('/accounts/login')
 
-
-
-
-#CREATE CATEGORY
+    
 def create_category(request):
     if request.user.is_authenticated:                                     
         data = {}
@@ -254,17 +208,12 @@ def create_category(request):
     return render(request, 'contas/category_form.html', data)
     
 
-
-
-# UPDATE CATEGORY 
 def update_category(request, id):
     if request.user.is_authenticated:
         data = {}
         category = Category.objects.get(id=id)
         form = CategoryForm(request.POST or None, instance=category)
 
-    
-     
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
@@ -277,23 +226,16 @@ def update_category(request, id):
     return render(request, 'contas/category_form.html', data)
 
 
-
-
-# LIST CATEGORY
 def list_category(request):
     if request.user.is_authenticated:
         data = {}
         data ['category'] = Category.objects.filter(user=request.user)
         
         return render(request,'contas/category.html', data)
-        
     else:
         return HttpResponseRedirect('/accounts/login')
         
-
-
-
-# DELETE CATEGORY
+    
 def delete_category(request, id):
     category = Category.objects.get(id=id)
     category.delete()
@@ -301,20 +243,14 @@ def delete_category(request, id):
     return redirect('url_list_category') 
 
 
-
-
-# EDIT PROFILE
 def editprofile(request):
    
     if request.user.is_authenticated:                              
         data = {}
-        
         profile = Profile.objects.get(user=request.user)
         form = ProfileForm(instance=profile)
 
         if request.method == 'POST':
-           
-          
             form = ProfileForm(request.POST or None,request.FILES, instance=profile)
             if form.is_valid():
                 task = form.save(commit=False)
@@ -328,13 +264,10 @@ def editprofile(request):
      
     else:
         return HttpResponseRedirect('/accounts/login')
-     
+    
     return render(request, 'contas/create_profile.html', data)   
 
-
-
-
-# VIEW PROFILE     
+     
 def profile(request):
     current_profile = Profile.objects.filter(user=request.user)
 
@@ -350,15 +283,11 @@ def profile(request):
     return render(request,'contas/profile.html', data)
 
 
-
-
-# CREATE PROFILE 
 def createprofile(request):
     if request.user.is_authenticated:                                     
         data = {}
         form = ProfileForm(request.POST or None, request.FILES)
 
-       
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
@@ -366,9 +295,6 @@ def createprofile(request):
             print('foi')
             return redirect('url_profile')
             
-
-                     
-
         data['form'] = form
     else:
         return HttpResponseRedirect('/accounts/login')

@@ -10,8 +10,6 @@
         <form method="POST" id="myForm" >
           <h1 class="title is-3">Categorias</h1>
             {% csrf_token %}
-  
-            
             <div class="ccontainer overflow-hidden">
               <div class="row gy-5">
                 <div class="col">
@@ -25,39 +23,19 @@
                   <br>
                   <p class="has-text-black">Cor da categoria:</p>
                   <p class="card"  style="width: 14mm;"> {{form.color}} </p>
-                
-                 
               </div>
             </div>
             <br>
-  
             <div class="con"></div>
-            
-  
                 <button class="button is-link  "type="submit">Salvar</button> 
-  
-                {% if category %}
-                
-                
+                {% if category %}             
                 <a href="{% url 'url_delete_category' category.id %}" class="button is-danger">Remover</a>
-                
                 {%endif%}
                 <br>
-                
-               
-  
               </div> 
-               
-               
-                
-              
             </div> 
-            
-            <br>
-            
-        </div>
-      
-        
+            <br> 
+        </div>   
       </section>
   </div>  
 {% endblock %}

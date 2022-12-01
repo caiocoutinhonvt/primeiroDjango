@@ -4,41 +4,26 @@
 
 {% load humanize %}
 
-
-
-
 <title>{%block title %} Perfil | Wallet {% endblock%}</title>
-
-        
+ 
 {% block content %}
 <div id="content" class="mb-0 pb-0">
-    
     <section class="section">
     <div class="box is-centered  "> 
       <form method='POST' action="" id="myForm" enctype="multipart/form-data">
-        
-        
         <div class="container rounded bg-white mt-5 mb-5"> 
           <div class="row"> <div class="col-md-3 border-right"> 
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-              
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"> 
               {% if profile.profile_ṕic.url != '' %}
               <img class="rounded-circle mt-5" src="{{ profile.profile_pic.url }}" alt="profile">
-
               {% else %}
               <img class="rounded-circle mt-5" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="profile">
-
-              {% endif %}
-              
-              
-
+              {% endif %}  
               {% csrf_token %}
-
               <br>
               <span class="font-weight-bold">{{profile.name}}</span>
               <span class="text-black-50">{{profile.email}}</span>
-              <span> </span>
-               
+              <span> </span>  
             </div> 
               <br><br>
               {{form.profile_pic}}
@@ -47,52 +32,31 @@
             <div class="p-3 py-5"> 
               <div class="d-flex justify-content-between align-items-center mb-3"> 
               <h1 class="title is-4">Configuração de Perfil</h1>
-
-             
-              
             </div> <div class="row mt-2"> <div class="col-md-6">
               <label class="labels has-text-black">Nome</label>
-              
               <div> <p class="card"  style="width: 10cm; height: 1cm;"> {{form.name}}</p></div>
-              
-            
-
-              
-              
             </div> <div class="col-md-6">
               <label class="labels has-text-black">Sobrenome</label>
               <div> <p class="card"  style="width: 13cm; height: 1cm;"> {{form.last_name}}</p></div>
-             
-            
             </div> 
           </div> 
           <div class="row mt-3"> 
             <div class="col-md-12">
               <label class="labels has-text-black">Genero:</label>
               <div> <p class="card"  style="width: 13cm; height: 1cm;"> {{form.gender}}</p></div>
-              
-             
-              
             </div>
              <div class="col-md-12 mt-4">
                <label class="labels has-text-black">Endereço:</label>
                <div> <p class="card"  style="width: 13cm;height: 1cm;"> {{form.adress}}</p></div>
-              
-               
               </div> 
               <div class="col-md-12 mt-3">
                 <label class="labels has-text-black">Email:</label>
                 <div> <p class="card"  style="width: 13cm;height: 1cm;"> {{form.email}}</p></div>
-                
               </div> 
-              
               <div class="col-md-12 mt-3">
-                
                 <label class="labels has-text-black">Telefone</label>
-                <div> <p class="card"  style="width: 13cm;height: 1cm;"> {{form.phone}}</p></div>
-                
+                <div> <p class="card"  style="width: 13cm;height: 1cm;"> {{form.phone}}</p></div> 
               </div> </div> 
-             
               <div class="row mt-3"> 
                 <div class="col-md-6">
                   <label class="labels has-text-black">Estado</label>
@@ -106,20 +70,13 @@
                   </div> 
                   <div class="mt-5 text-center">
                     <button class="btn btn-primary profile-button" type="submit">
-                      Salvar Alterações
-                      
+                      Salvar Alterações  
                   </button>
                 </div> 
-               
               </div> 
-             
             </div> 
             <div class="col-md-4">
-              <div class="p-3 py-5">
-                 
-                   
-                    
-                      
+              <div class="p-3 py-5">  
                     <div class="d-flex justify-content-between align-items-center mb-3"> 
                       <h1 class="title is-4">Preferências do usuário</h1>
                       
@@ -127,11 +84,7 @@
                   <div class="col-md-12">
                     <label class="labels has-text-black"> Seu limite mensal</label>
                     <div> <p class="card"  style="width: 13cm;" placeholder = 'teste'> {{form.limit_month }} </p></div>
-                  
-                    
-                  </div> 
-                 
-                  
+                  </div>  
               </div>
           </div>
       </div>
@@ -139,11 +92,10 @@
 </div>
 </div>
 </div>
-
-                </div> 
-         </div>       
+</div> 
+</div>       
     
-   </section>
+</section>
 </div> 
 {% endblock %}
 

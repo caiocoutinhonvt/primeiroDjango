@@ -10,12 +10,8 @@ class SexOptions(models.TextChoices):
     MASCULINO = 'Masculino'
     OUTROS = 'OUTROS'
 
-   
-        
     
-
 class Profile(models.Model):
-    
     limit_month = models.DecimalField(max_digits=10, decimal_places=2)
     user = models.ForeignKey(get_user_model(), on_delete= models.CASCADE, related_name='user_profile')
     profile_pic = models.ImageField(upload_to= "images/profile/", default = 'default.svg', null=True, blank=True)
@@ -28,14 +24,9 @@ class Profile(models.Model):
     city = models.CharField(max_length=100)
     cep = models.IntegerField()
 
-
     def __str__(self):
         return self.name
     
-   
-    
-
-
 
 class Category(models.Model):
     name = models.CharField('nome', max_length=100)
@@ -44,10 +35,8 @@ class Category(models.Model):
     user = models.ForeignKey(User, on_delete= models.CASCADE)
     color = models.CharField(max_length=7)
     
-
     def __str__(self):
         return self.name
-
 
 class Transaction(models.Model):
     

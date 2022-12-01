@@ -15,24 +15,11 @@
     <div class="box is-centered  "> 
       <form method="POST" id="myForm" >
         <h1 class="title is-3">Despesa</h1>
-
-
-
-
-
-
-
-
-          {% csrf_token %}
-          
-          {% if error %}
-         
+          {% csrf_token %}      
+          {% if error %}  
           <h1 class="alert alert-danger">{{error}}</h1>
-    
-
           <br>
           {% endif %}
-          
           <div class="ccontainer overflow-hidden">
             <div class="row gy-5">
               <div class="col">
@@ -48,14 +35,11 @@
                <div> {{form.price.errors}}</div>
                {% endif %}
                <br>
-               
                <p class ='has-text-black'>Categoria:</p>
-               
                <p class="card has-text-black" style="width: 20rem;">{{form.category}}</p>
                {% if errors %}
                <div> {{form.category.errors}}</div>
                {% endif %}
-
               </div>
               <div class="col">
                 <p class="has-text-black">Data:</p>
@@ -65,33 +49,16 @@
                    <div> {{form.date.errors}}</div>
                    {% endif %}
               </div>
-             
             </div>
           </div>
           <br>
-
           <div class="con"></div>
-          
-
               <button class="button is-link  "type="submit">Salvar</button> 
-
-              
               <br>
-              
-             
-
             </div> 
-             
-             
-              
-            
           </div> 
-          
           <br>
-          
       </div>
-    
-      
     </section>
 </div>  
   
